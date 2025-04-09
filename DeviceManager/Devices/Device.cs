@@ -22,4 +22,6 @@ public abstract class Device
     {
         IsEnabled = false;
     }
+
+    public abstract String toFile();
 }

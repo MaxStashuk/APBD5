@@ -66,4 +66,12 @@ class Embedded : Device
     }
     
     private bool CheckId(string id) => id.Contains("E-");
+
+    public override String toFile()
+    {
+        return ($"{this.Id},{this.Name}," +
+                $"{this.IsEnabled},{this.IpAddress}," +
+                $"{this.NetworkName}");
+    }
+    
 }

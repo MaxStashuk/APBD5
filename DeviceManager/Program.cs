@@ -9,7 +9,7 @@ class Program
     {
         try
         {
-            DeviceManager deviceManager = new("input.txt");
+            DeviceManager deviceManager = null; //= new("input.txt");
             
             Console.WriteLine("Devices presented after file read.");
             deviceManager.ShowAllDevices();

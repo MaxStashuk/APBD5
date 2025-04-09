@@ -62,4 +62,10 @@ class Smartwatch : Device, IPowerNotify
     }
     
     private bool CheckId(string id) => id.Contains("E-");
+
+    public override string toFile()
+    {
+        return ($"{this.Id},{this.Name}," +
+                $"{this.IsEnabled},{this.BatteryLevel}%");
+    }
 }
