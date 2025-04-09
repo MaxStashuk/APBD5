@@ -37,7 +37,14 @@ public class FileService : IRepository
 
     public void saveDevices(IEnumerable<Device> devices)
     {
-        throw new NotImplementedException();
+        StringBuilder devicesSb = new();
+
+        foreach (var storedDevice in devices)
+        {
+            devicesSb.AppendLine(storedDevice.ToString());
+        }
+        
+        File.WriteAllLines(_filePath, devicesSb.ToString().Split('\n'));
     }
     
     private Device? ParseDevice(string line, int lineNumber)
@@ -71,18 +78,6 @@ public class FileService : IRepository
             Console.WriteLine($"Something went wrong during parsing this line: {line}. The exception message: {ex.Message}");
         }
         return parsedDevice;
-    }
-    
-    public void SaveDevices(List<Device> devices)
-    {
-        StringBuilder devicesSb = new();
-
-        foreach (var storedDevice in devices)
-        {
-            devicesSb.AppendLine(storedDevice.ToString());
-        }
-        
-        File.WriteAllLines(_filePath, devicesSb.ToString().Split('\n'));
     }
     
 }
