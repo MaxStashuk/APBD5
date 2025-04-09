@@ -1,5 +1,8 @@
 ﻿using DeviceManager.Devices;
 using DeviceManager.Exceptions;
+using DeviceManager.Factories;
+using DeviceManager.Interfaces;
+using DeviceManager.Utilities;
 
 namespace DeviceManager;
 
@@ -9,7 +12,7 @@ class Program
     {
         try
         {
-            DeviceManager deviceManager = null; //= new("input.txt");
+            DeviceManager deviceManager = DeviceManagerFactory.CreateDeviceManager("input.txt");
             
             Console.WriteLine("Devices presented after file read.");
             deviceManager.ShowAllDevices();
