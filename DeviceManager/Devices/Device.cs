@@ -23,5 +23,7 @@ public abstract class Device
         IsEnabled = false;
     }
 
-    public abstract String toFile();
+    public abstract String ToFile();
+    
+    public abstract void EditDevice(Device device);
 }

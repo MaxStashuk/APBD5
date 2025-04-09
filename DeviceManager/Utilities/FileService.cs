@@ -41,7 +41,7 @@ public class FileService : IRepository
 
         foreach (var storedDevice in devices)
         {
-            devicesSb.AppendLine(storedDevice.ToString());
+            devicesSb.AppendLine(storedDevice.ToFile());
         }
         
         File.WriteAllLines(_filePath, devicesSb.ToString().Split('\n'));

@@ -67,11 +67,24 @@ class Embedded : Device
     
     private bool CheckId(string id) => id.Contains("E-");
 
-    public override String toFile()
+    public override String ToFile()
     {
         return ($"{this.Id},{this.Name}," +
                 $"{this.IsEnabled},{this.IpAddress}," +
                 $"{this.NetworkName}");
     }
-    
+
+    public override void EditDevice(Device device)
+    {
+        if (device is not Embedded)
+        {
+            throw new ArgumentException("Device is not Embedded");
+        }
+        if (device.Id != this.Id)
+        {
+            throw new ArgumentException("Trying to modify different device");
+        }
+        this.Id = device.Id;
+        this.Name = device.Name;
+    }
 }

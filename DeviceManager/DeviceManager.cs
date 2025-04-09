@@ -14,7 +14,7 @@ public class DeviceManager
     public DeviceManager(IRepository repository)
     {
         this.repository = repository;
-        _devices = repository.GetDevices().Take(MaxCapacity).ToList();
+        _devices = this.repository.GetDevices().Take(MaxCapacity).ToList();
     }
 
     public void AddDevice(Device newDevice)
@@ -33,15 +33,16 @@ public class DeviceManager
         }
         
         _devices.Add(newDevice);
+        repository.saveDevices(_devices);
     }
 
-    public void EditDevice(Device editDevice)
+    public void EditDevice(Device device)
     {
         var targetDeviceIndex = -1;
         for (var index = 0; index < _devices.Count; index++)
         {
             var storedDevice = _devices[index];
-            if (storedDevice.Id.Equals(editDevice.Id))
+            if (storedDevice.Id.Equals(device.Id))
             {
                 targetDeviceIndex = index;
                 break;
@@ -50,47 +51,10 @@ public class DeviceManager
 
         if (targetDeviceIndex == -1)
         {
-            throw new ArgumentException($"Device with ID {editDevice.Id} is not stored.", nameof(editDevice));
+            throw new ArgumentException($"Device with ID {device.Id} is not stored.", nameof(device));
         }
 
-        if (editDevice is Smartwatch)
-        {
-            if (_devices[targetDeviceIndex] is Smartwatch)
-            {
-                _devices[targetDeviceIndex] = editDevice;
-            }
-            else
-            {
-                throw new ArgumentException($"Type mismatch between devices. " +
-                                            $"Target device has type {_devices[targetDeviceIndex].GetType().Name}");
-            }
-        }
-        
-        if (editDevice is PersonalComputer)
-        {
-            if (_devices[targetDeviceIndex] is PersonalComputer)
-            {
-                _devices[targetDeviceIndex] = editDevice;
-            }
-            else
-            {
-                throw new ArgumentException($"Type mismatch between devices. " +
-                                            $"Target device has type {_devices[targetDeviceIndex].GetType().Name}");
-            }
-        }
-        
-        if (editDevice is Embedded)
-        {
-            if (_devices[targetDeviceIndex] is Embedded)
-            {
-                _devices[targetDeviceIndex] = editDevice;
-            }
-            else
-            {
-                throw new ArgumentException($"Type mismatch between devices. " +
-                                            $"Target device has type {_devices[targetDeviceIndex].GetType().Name}");
-            }
-        }
+        _devices[targetDeviceIndex].EditDevice(device);
     }
 
     public void RemoveDeviceById(string deviceId)

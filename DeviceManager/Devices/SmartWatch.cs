@@ -63,9 +63,24 @@ class Smartwatch : Device, IPowerNotify
     
     private bool CheckId(string id) => id.Contains("E-");
 
-    public override string toFile()
+    public override string ToFile()
     {
         return ($"{this.Id},{this.Name}," +
                 $"{this.IsEnabled},{this.BatteryLevel}%");
     }
+    
+    public override void EditDevice(Device device)
+    {
+        if (device is not Smartwatch)
+        {
+            throw new ArgumentException("Device is not Embedded");
+        }
+        if (device.Id != this.Id)
+        {
+            throw new ArgumentException("Trying to modify different device");
+        }
+        this.Id = device.Id;
+        this.Name = device.Name;
+    }
+    
 }
