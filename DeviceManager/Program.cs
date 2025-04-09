@@ -49,6 +49,7 @@ class Program
             
             Console.WriteLine("Devices presented after all operations.");
             deviceManager.ShowAllDevices();
+            deviceManager.SaveDevices();
         }
         catch (Exception ex)
         {

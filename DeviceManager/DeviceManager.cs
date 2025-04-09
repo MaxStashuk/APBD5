@@ -125,4 +125,14 @@ public class DeviceManager
             Console.WriteLine(storedDevices.ToString());
         }
     }
+
+    public List<Device> GetDevices()
+    {
+        return _devices;
+    }
+
+    public void SaveDevices()
+    {
+        repository.saveDevices(_devices);
+    }
 }
