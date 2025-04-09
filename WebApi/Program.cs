@@ -56,6 +56,16 @@ app.MapPut("/api/devices/", (Device device) =>
     return Results.Ok();
 });
 
-app.Map
+app.MapDelete("/api/devices/{id}", (string id) =>
+{
+    var device = deviceManager.GetDeviceById(id);
+    if (device == null)
+    {
+        return Results.Problem(detail: "Device not found");
+    }
+
+    deviceManager.RemoveDeviceById(device.Id);
+    return Results.Ok();
+});
 
 app.Run();
