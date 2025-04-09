@@ -3,7 +3,7 @@ using DeviceManager.Interfaces;
 
 namespace DeviceManager.Devices;
 
-class Smartwatch : Device, IPowerNotify
+public class Smartwatch : Device, IPowerNotify
 {
     private int _batteryLevel;
 
@@ -33,6 +33,8 @@ class Smartwatch : Device, IPowerNotify
         }
         BatteryLevel = batteryLevel;
     }
+    
+    public Smartwatch() : base("", "", false){}
 
     public void Notify()
     {

@@ -3,7 +3,7 @@ using DeviceManager.Exceptions;
 
 namespace DeviceManager.Devices;
 
-class Embedded : Device
+public class Embedded : Device
 {
     public string NetworkName { get; set; }
     private string _ipAddress;
@@ -18,6 +18,7 @@ class Embedded : Device
             if (ipRegex.IsMatch(value))
             {
                 _ipAddress = value;
+                return;
             }
 
             throw new ArgumentException("Wrong IP address format.");
@@ -34,7 +35,9 @@ class Embedded : Device
         IpAddress = ipAddress;
         NetworkName = networkName;
     }
-
+    
+    public Embedded() : base("", "", false){}
+    
     public override void TurnOn()
     {
         Connect();

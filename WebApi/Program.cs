@@ -35,22 +35,67 @@ app.MapGet("/api/devices/{id}", (string id) =>
     return Results.Ok(device);
 });
 
-app.MapPost("/api/devices/", (Device device) =>
+app.MapPost("/api/devices/embedded", (DeviceManager.Devices.Embedded device) =>
 {
     if (deviceManager.GetDeviceById(device.Id) != null)
     {
-        deviceManager.AddDevice(device);
-        devices = deviceManager.GetDevices();
+        return Results.Problem(detail: "Already have device with this ID");
     }
-    else
+
+    deviceManager.AddDevice(device);
+    deviceManager.SaveDevices();
+    devices = deviceManager.GetDevices();
+    
+    return Results.Ok();
+
+});
+
+app.MapPost("/api/devices/smartwatch", (DeviceManager.Devices.Smartwatch device) =>
+{
+    if (deviceManager.GetDeviceById(device.Id) != null)
     {
-        return Results.Problem(detail:"Already have device with this ID");
+        return Results.Problem(detail: "Already have device with this ID");
     }
+
+    deviceManager.AddDevice(device);
+    deviceManager.SaveDevices();
+    devices = deviceManager.GetDevices();
+    
+    return Results.Ok();
+
+});
+
+app.MapPost("/api/devices/pc", (DeviceManager.Devices.PersonalComputer device) =>
+{
+    if (deviceManager.GetDeviceById(device.Id) != null)
+    {
+        return Results.Problem(detail: "Already have device with this ID");
+    }
+
+    deviceManager.AddDevice(device);
+    deviceManager.SaveDevices();
+    devices = deviceManager.GetDevices();
+    
+    return Results.Ok();
+
+});
+
+app.MapPut("/api/devices/embedded", (Embedded device) =>
+{   
+    deviceManager.EditDevice(device);
+    devices = deviceManager.GetDevices();
     return Results.Ok();
 });
 
-app.MapPut("/api/devices/", (Device device) =>
-{
+app.MapPut("/api/devices/smartwatch", (Smartwatch device) =>
+{   
+    deviceManager.EditDevice(device);
+    devices = deviceManager.GetDevices();
+    return Results.Ok();
+});
+
+app.MapPut("/api/devices/pc", (PersonalComputer device) =>
+{   
     deviceManager.EditDevice(device);
     devices = deviceManager.GetDevices();
     return Results.Ok();

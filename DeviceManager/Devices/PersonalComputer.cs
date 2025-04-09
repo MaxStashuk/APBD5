@@ -2,7 +2,7 @@
 
 namespace DeviceManager.Devices;
 
-class PersonalComputer : Device
+public class PersonalComputer : Device
 {
     public string? OperatingSystem { get; set; }
     
@@ -15,6 +15,8 @@ class PersonalComputer : Device
         
         OperatingSystem = operatingSystem;
     }
+    
+    public PersonalComputer() : base("", "", false){}
 
     public override void TurnOn()
     {
