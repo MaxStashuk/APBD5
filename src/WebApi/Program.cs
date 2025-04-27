@@ -50,7 +50,7 @@ app.MapPost("/api/devices/embedded", (DeviceManager.Devices.Embedded device) =>
 
 });
 
-app.MapPost("/api/devices/smartwatch", (DeviceManager.Devices.Smartwatch device) =>
+app.MapPost("/api/devices/smartwatches", (DeviceManager.Devices.Smartwatch device) =>
 {
     if (deviceManager.GetDeviceById(device.Id) != null)
     {

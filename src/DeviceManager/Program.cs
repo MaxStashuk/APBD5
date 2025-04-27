@@ -1,8 +1,6 @@
 ﻿using DeviceManager.Devices;
 using DeviceManager.Exceptions;
 using DeviceManager.Factories;
-using DeviceManager.Interfaces;
-using DeviceManager.Utilities;
 
 namespace DeviceManager;
 
