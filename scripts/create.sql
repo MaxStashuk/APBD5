@@ -1,0 +1,45 @@
+IF DB_ID('DevicesDataBase') IS NOT NULL
+    BEGIN
+        ALTER DATABASE DevicesDataBase SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+        DROP DATABASE DevicesDataBase;
+    END;
+GO
+
+CREATE DATABASE DevicesDataBase;
+GO
+
+USE DevicesDataBase;
+GO
+
+-- Models
+CREATE TABLE Device (
+    Id VARCHAR(50) PRIMARY KEY,
+    Name VARCHAR(250) NOT NULL,
+    IsEnabled BIT NOT NULL
+);
+GO
+
+CREATE TABLE Embedded (
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    IpAddress VARCHAR(250) NOT NULL,
+    NetworkName VARCHAR(250) NOT NULL,
+    DeviceId VARCHAR(50) NOT NULL UNIQUE,
+    FOREIGN KEY (DeviceId) REFERENCES Device(Id)
+);
+GO
+
+CREATE TABLE PersonalComputer (
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    OperationSystem VARCHAR(250),
+    DeviceId VARCHAR(50) NOT NULL UNIQUE,
+    FOREIGN KEY (DeviceId) REFERENCES Device(Id)
+);
+GO
+
+CREATE TABLE Smartwatch (
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    BatteryPercentage INT NOT NULL,
+    DeviceId VARCHAR(50) NOT NULL UNIQUE,
+    FOREIGN KEY (DeviceId) REFERENCES Device(Id)
+);
+GO

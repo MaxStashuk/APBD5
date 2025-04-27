@@ -1,5 +1,4 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeviceManager", "src\DeviceManager\DeviceManager.csproj", "{130FA455-8F76-45B6-9D82-6B9FD3BDDA57}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "src\WebApi\WebApi.csproj", "{DD3B69FE-3935-469D-B28B-CC75FEE56A94}"
